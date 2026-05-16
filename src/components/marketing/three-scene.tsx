@@ -187,10 +187,9 @@ export function ThreeHeroAccent({ accent = "#C4936A" }: { accent?: string }) {
       return g;
     });
 
-    let mx = 0, my = 0;
+    let mx = 0;
     const onMove = (e: MouseEvent) => {
       mx = (e.clientX / W - 0.5) * 0.3;
-      my = (e.clientY / H - 0.5) * 0.3;
     };
     window.addEventListener("mousemove", onMove);
 
