@@ -743,7 +743,7 @@ export default function ClientPage() {
           </div>
 
           {/* Second row of gallery */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 12, marginTop: 12 }} className="services-grid">
+          <div className="four-col-grid" style={{ marginTop: 12 }}>
             {[
               { src: "/photo-ice-blonde-bob.jpg", label: "Ice Blonde Bob", alt: "Ice blonde bob haircut Medway" },
               { src: "/photo-silver-bob2.jpg", label: "Silver Bob", alt: "Silver bob hair salon Chatham" },
@@ -773,7 +773,7 @@ export default function ClientPage() {
               Led by a qualified dental professional — combining clinical precision with natural, beautiful results.
             </p>
           </div>
-          <div className="services-grid" style={{ gridTemplateColumns: "repeat(3,1fr)" }}>
+          <div className="three-col-grid">
             {AESTHETICS.map((a, i) => (
               <div
                 key={a.title}
@@ -935,7 +935,7 @@ export default function ClientPage() {
             <span className="section-eyebrow">Simple Process</span>
             <h2 className="section-h2">Your Visit to A Cut Above</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 32 }} className="services-grid">
+          <div className="three-col-grid" style={{ gap: 32 }}>
             {[
               { step: "01", title: "Book Your Appointment", desc: "Call or WhatsApp us on 07450 987978. We'll confirm your slot and prepare for your visit." },
               { step: "02", title: "Arrive & Consult", desc: "We take time to understand your goals — whether it's a trim, full colour transformation or aesthetic treatment." },
@@ -1044,7 +1044,7 @@ export default function ClientPage() {
             <span className="section-eyebrow">5-Star Reviews</span>
             <h2 className="section-h2">What Clients Say</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }} className="services-grid">
+          <div className="three-col-grid" style={{ gap: 24 }}>
             {[
               { name: "Sarah M.", text: "Absolutely love my balayage! The team at A Cut Above are so talented — I've been coming here for years and never disappointed.", stars: 5 },
               { name: "James K.", text: "Best barber in Medway. Clean fade every time, great atmosphere. Wouldn't go anywhere else for my cut.", stars: 5 },
@@ -1417,7 +1417,7 @@ function ContactForm() {
         boxShadow: "0 4px 24px rgba(0,0,0,0.05)",
       }}
     >
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+      <div className="services-grid" style={{ gap: 16 }}>
         <div>
           <label style={{ fontSize: "0.8rem", fontWeight: 600, color: "#374151", display: "block", marginBottom: 6 }}>Name *</label>
           <input style={inputStyle} required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" />
