@@ -7,10 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ThreeHeroAccent = dynamic(
-  () => import("./marketing/three-scene").then((m) => ({ default: m.ThreeHeroAccent })),
-  { ssr: false }
-);
 const ThreeDarkBg = dynamic(
   () => import("./marketing/three-scene").then((m) => ({ default: m.ThreeDarkBg })),
   { ssr: false }
@@ -368,14 +364,39 @@ export default function ClientPage() {
         style={{
           position: "relative",
           overflow: "hidden",
-          background: "var(--bg)",
+          minHeight: "95vh",
+          display: "flex",
+          alignItems: "center",
           paddingTop: 68,
         }}
       >
-        <ThreeHeroAccent accent={ACCENT} />
-        <div className="hero-grid" style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 2 }}>
-          {/* Left */}
-          <div>
+        {/* Full-bleed background photo */}
+        <Image
+          src="/photo-hero-bg.jpg"
+          alt="Beautiful hair styling at A Cut Above salon Chatham Medway"
+          fill
+          style={{ objectFit: "cover", objectPosition: "center 30%" }}
+          sizes="100vw"
+          priority
+        />
+
+        {/* Gradient overlays for readability */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to right, rgba(10,8,6,0.82) 0%, rgba(10,8,6,0.55) 55%, rgba(10,8,6,0.25) 100%)",
+        }} />
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(to top, rgba(10,8,6,0.6) 0%, transparent 55%)",
+        }} />
+
+        {/* Scissors accent — safe on dark photo */}
+        <ThreeDarkBg accent={ACCENT} count={300} />
+
+        {/* Content */}
+        <div style={{ position: "relative", zIndex: 2, maxWidth: 1200, margin: "0 auto", padding: "80px 24px", width: "100%" }}>
+          <div style={{ maxWidth: 640 }}>
+
             <div className="hero-eyebrow">
               <span
                 className="float-3d"
@@ -383,8 +404,8 @@ export default function ClientPage() {
                   display: "inline-flex",
                   alignItems: "center",
                   gap: 8,
-                  background: "rgba(196,147,106,0.12)",
-                  border: "1px solid rgba(196,147,106,0.3)",
+                  background: "rgba(196,147,106,0.18)",
+                  border: "1px solid rgba(196,147,106,0.45)",
                   borderRadius: 50,
                   padding: "6px 16px",
                   fontSize: "0.75rem",
@@ -402,18 +423,18 @@ export default function ClientPage() {
               className="hero-h1"
               style={{
                 fontFamily: "var(--font-playfair), serif",
-                fontSize: "clamp(2.2rem, 5.5vw, 4rem)",
+                fontSize: "clamp(2.4rem, 5.5vw, 4.2rem)",
                 fontWeight: 700,
-                lineHeight: 1.1,
+                lineHeight: 1.08,
                 letterSpacing: "-0.02em",
                 marginTop: 20,
-                color: "#1a1a1a",
+                color: "#fff",
               }}
             >
               Hair Salon &amp; <br />
               <span className="shimmer-text">Aesthetics Clinic</span>
               <br />
-              <span style={{ color: "#1a1a1a" }}>in Chatham</span>
+              <span style={{ color: "#fff" }}>in Chatham</span>
             </h1>
 
             <p
@@ -421,9 +442,9 @@ export default function ClientPage() {
               style={{
                 marginTop: 20,
                 fontSize: "clamp(1rem, 1.5vw, 1.15rem)",
-                color: "#4b5563",
+                color: "rgba(255,255,255,0.82)",
                 lineHeight: 1.7,
-                maxWidth: 480,
+                maxWidth: 520,
               }}
             >
               Expert hair colouring, balayage, bridal styling &amp; barber services — plus BA Aesthetics by Dentist for lip fillers, botox &amp; more. All under one roof in Medway.
@@ -434,10 +455,21 @@ export default function ClientPage() {
               style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 32 }}
             >
               <a href="#contact" className="btn-accent">Book an Appointment</a>
-              <a href="#services" className="btn-outline">Our Services</a>
+              <a
+                href="#services"
+                style={{
+                  display: "inline-flex", alignItems: "center", justifyContent: "center",
+                  background: "transparent", color: "#fff", fontWeight: 600, fontSize: "0.95rem",
+                  padding: "13px 28px", borderRadius: 50, border: "2px solid rgba(255,255,255,0.5)",
+                  cursor: "pointer", minHeight: 44, textDecoration: "none",
+                  transition: "border-color 0.2s, background 0.2s",
+                }}
+              >
+                Our Services
+              </a>
             </div>
 
-            <div className="hero-stats stats-grid" style={{ marginTop: 40 }}>
+            <div className="hero-stats stats-grid" style={{ marginTop: 48, maxWidth: 400 }}>
               {[
                 { val: 3000, suffix: "+", label: "Happy Customers" },
                 { val: 10, suffix: "+", label: "Years Experience" },
@@ -456,69 +488,9 @@ export default function ClientPage() {
                     <span data-count={val}>0</span>
                     {suffix}
                   </div>
-                  <div style={{ fontSize: "0.8rem", color: "#6b7280", marginTop: 4, fontWeight: 500 }}>{label}</div>
+                  <div style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.6)", marginTop: 4, fontWeight: 500 }}>{label}</div>
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Right — photos */}
-          <div
-            className="hero-photos"
-            style={{ display: "grid", gridTemplateRows: "1fr 1fr", gap: 16, height: 520 }}
-          >
-            <div style={{ position: "relative", borderRadius: 20, overflow: "hidden" }}>
-              <Image
-                src="/photo-storefront.webp"
-                alt="A Cut Above hair salon Chatham storefront"
-                fill
-                style={{ objectFit: "cover" }}
-                sizes="50vw"
-                priority
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%)",
-                }}
-              />
-              <div
-                style={{
-                  position: "absolute",
-                  bottom: 14,
-                  left: 18,
-                  fontSize: 11,
-                  fontWeight: 700,
-                  color: "#fff",
-                  letterSpacing: "0.06em",
-                  textTransform: "uppercase",
-                }}
-              >
-                20 Shirley Ave, Chatham ME5 9UR
-              </div>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-              <div style={{ position: "relative", borderRadius: 16, overflow: "hidden" }}>
-                <Image
-                  src="/photo-updo.webp"
-                  alt="Bridal updo hairstyling Medway"
-                  fill
-                  style={{ objectFit: "cover" }}
-                  sizes="25vw"
-                  priority
-                />
-              </div>
-              <div style={{ position: "relative", borderRadius: 16, overflow: "hidden" }}>
-                <Image
-                  src="/photo-mens-fade.webp"
-                  alt="Men's fade barber Chatham"
-                  fill
-                  style={{ objectFit: "cover" }}
-                  sizes="25vw"
-                  priority
-                />
-              </div>
             </div>
           </div>
         </div>
