@@ -948,6 +948,7 @@ export default function ClientPage() {
       </section>
 
       {/* ── ABOUT / LOCATION ─────────────────────────────────── */}
+      <span id="contact" style={{ display: "block", height: 0 }} />
       <section id="about" style={{ padding: "clamp(64px,8vw,96px) 24px", background: "var(--bg)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div className="area-grid">
@@ -991,7 +992,11 @@ export default function ClientPage() {
                   </span>
                 ))}
               </div>
-              <a href="#contact" className="btn-accent">Get in Touch</a>
+              <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                <a href="tel:07450987978" className="btn-accent">Call Now</a>
+                <a href="mailto:pinargokhan_93@hotmail.com" className="btn-outline">Email</a>
+                <a href="https://www.facebook.com/acutabovehairsaloon" target="_blank" rel="noopener noreferrer" className="btn-outline">Facebook</a>
+              </div>
             </div>
             <div className="reveal-right map-wrap" style={{ height: 420, borderRadius: 20, overflow: "hidden", boxShadow: "0 8px 32px rgba(0,0,0,0.1)" }}>
               <iframe
@@ -1099,70 +1104,6 @@ export default function ClientPage() {
                 </div>
               </details>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CONTACT ─────────────────────────────────────────── */}
-      <section id="contact" style={{ padding: "clamp(64px,8vw,96px) 24px", background: "#fff" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div className="contact-grid">
-            <div className="reveal-left">
-              <span className="section-eyebrow">Get In Touch</span>
-              <h2 className="section-h2" style={{ marginBottom: 20 }}>Book Your Appointment</h2>
-              <p style={{ color: "#6b7280", lineHeight: 1.7, marginBottom: 32, fontSize: "0.95rem" }}>
-                Ready for a fresh look? Call us, send a WhatsApp or fill in the form and we&apos;ll be in touch to confirm your booking.
-              </p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                {[
-                  { icon: "📍", label: "Address", val: "20 Shirley Ave, Chatham, ME5 9UR" },
-                  { icon: "📞", label: "Phone / WhatsApp", val: "07450 987978" },
-                  { icon: "✂️", label: "Services", val: "Hair Salon · Barber · Aesthetics" },
-                ].map(({ icon, label, val }) => (
-                  <div key={label} style={{ display: "flex", gap: 14, alignItems: "flex-start" }}>
-                    <div
-                      style={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: "50%",
-                        background: "rgba(196,147,106,0.1)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "1.1rem",
-                        flexShrink: 0,
-                      }}
-                    >
-                      {icon}
-                    </div>
-                    <div>
-                      <div style={{ fontSize: "0.75rem", fontWeight: 700, color: ACCENT, textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: 2 }}>
-                        {label}
-                      </div>
-                      <div style={{ fontSize: "0.95rem", color: "#374151" }}>{val}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div style={{ marginTop: 32 }}>
-                <a href="tel:07450987978" className="btn-accent" style={{ marginRight: 12 }}>
-                  Call Now
-                </a>
-                <a
-                  href="https://wa.me/447450987978"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-outline"
-                >
-                  WhatsApp
-                </a>
-              </div>
-            </div>
-
-            {/* Contact form */}
-            <div className="reveal-right">
-              <ContactForm />
-            </div>
           </div>
         </div>
       </section>
@@ -1301,6 +1242,9 @@ export default function ClientPage() {
                 <a href="tel:07450987978" style={{ color: ACCENT, textDecoration: "none", display: "block", marginTop: 8, fontWeight: 600 }}>
                   07450 987978
                 </a>
+                <a href="https://www.facebook.com/acutabovehairsaloon" target="_blank" rel="noopener noreferrer" style={{ color: ACCENT, textDecoration: "none", display: "block", fontWeight: 600 }}>
+                  Facebook
+                </a>
               </div>
             </div>
           </div>
@@ -1335,96 +1279,3 @@ export default function ClientPage() {
   );
 }
 
-function ContactForm() {
-  const [form, setForm] = useState({ name: "", phone: "", email: "", message: "", service: "" });
-  const [sent, setSent] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
-  };
-
-  if (sent) {
-    return (
-      <div
-        style={{
-          background: "rgba(196,147,106,0.08)",
-          border: "1px solid rgba(196,147,106,0.3)",
-          borderRadius: 16,
-          padding: "48px 32px",
-          textAlign: "center",
-        }}
-      >
-        <div style={{ fontSize: "2.5rem", marginBottom: 16 }}>✓</div>
-        <h3 style={{ fontFamily: "var(--font-playfair)", fontSize: "1.3rem", marginBottom: 8 }}>Message Sent!</h3>
-        <p style={{ color: "#6b7280" }}>We&apos;ll be in touch shortly to confirm your appointment.</p>
-      </div>
-    );
-  }
-
-  const inputStyle: React.CSSProperties = {
-    width: "100%",
-    padding: "12px 16px",
-    border: "1px solid rgba(196,147,106,0.25)",
-    borderRadius: 10,
-    fontSize: "1rem",
-    background: "#fffaf7",
-    color: "#1a1a1a",
-    outline: "none",
-    fontFamily: "var(--font-inter), sans-serif",
-    minHeight: 44,
-  };
-
-  return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 16,
-        background: "var(--bg)",
-        borderRadius: 20,
-        padding: "36px 32px",
-        border: "1px solid rgba(196,147,106,0.15)",
-        boxShadow: "0 4px 24px rgba(0,0,0,0.05)",
-      }}
-    >
-      <div className="services-grid" style={{ gap: 16 }}>
-        <div>
-          <label style={{ fontSize: "0.8rem", fontWeight: 600, color: "#374151", display: "block", marginBottom: 6 }}>Name *</label>
-          <input style={inputStyle} required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="Your name" />
-        </div>
-        <div>
-          <label style={{ fontSize: "0.8rem", fontWeight: 600, color: "#374151", display: "block", marginBottom: 6 }}>Phone *</label>
-          <input style={inputStyle} required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} placeholder="07..." type="tel" />
-        </div>
-      </div>
-      <div>
-        <label style={{ fontSize: "0.8rem", fontWeight: 600, color: "#374151", display: "block", marginBottom: 6 }}>Email</label>
-        <input style={inputStyle} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="your@email.com" type="email" />
-      </div>
-      <div>
-        <label style={{ fontSize: "0.8rem", fontWeight: 600, color: "#374151", display: "block", marginBottom: 6 }}>Service Interested In</label>
-        <select style={inputStyle} value={form.service} onChange={(e) => setForm({ ...form, service: e.target.value })}>
-          <option value="">Select a service...</option>
-          {ALL_SERVICES.map((s) => <option key={s} value={s}>{s}</option>)}
-          <option value="Aesthetics - Lip Fillers">Aesthetics – Lip Fillers</option>
-          <option value="Aesthetics - Botox">Aesthetics – Botox</option>
-          <option value="Aesthetics - Other">Aesthetics – Other</option>
-        </select>
-      </div>
-      <div>
-        <label style={{ fontSize: "0.8rem", fontWeight: 600, color: "#374151", display: "block", marginBottom: 6 }}>Message</label>
-        <textarea
-          style={{ ...inputStyle, minHeight: 100, resize: "vertical" }}
-          value={form.message}
-          onChange={(e) => setForm({ ...form, message: e.target.value })}
-          placeholder="Any additional details or questions..."
-        />
-      </div>
-      <button type="submit" className="btn-accent" style={{ width: "100%", fontSize: "0.95rem" }}>
-        Send Enquiry
-      </button>
-    </form>
-  );
-}
